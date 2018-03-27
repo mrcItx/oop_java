@@ -1,0 +1,23 @@
+public class MatrixPrint {
+public static void main(String[] args) {
+            cikle(25);
+        }
+
+        public static void cikle(int size) {
+            for (int count=1; count<=size; count=count+5){
+                for (int j=count; j<=(count+4); j++) {
+                    if (j == 1 | j == 5 | j == 7 | j == 9 | j == 13 | j == 17 | j == 19 | j == 21 | j == 25){
+                        //System.out.print("*" + "\t");
+                        System.out.format("%2c ", '*');
+                    }
+                    else {
+                        // System.out.print(j + "\t");
+                        System.out.format("%2d ", j);
+                    }
+                }
+                System.out.println("");
+            }
+
+        }
+        }
+      
