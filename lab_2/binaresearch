@@ -1,4 +1,4 @@
-public class CopyOfBinarySearch {
+public class BinarySearch {
 
        public static void main(String[] args) {
             int[] data = {3, 6, 7, 10, 34, 56, 60};
