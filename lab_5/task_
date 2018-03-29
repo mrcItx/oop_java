@@ -1,40 +1,85 @@
- class Comparator {
-// 	public int compare(int a, int b){
-// 		if (a>b) {
-// 			return 1;
-// 		} else if (a == b){
-// 			return 0;
-// 		} else {
-// 			return -1;
-// 		}
-// 	}
-// }
+ package com.tasks5.command;
 
-public class Sort {
-	private static void sort(int[] array, Comparator comp) {
-		for (int gap = array.length / 2; gap > 0; gap /= 2) {
-			for (int i = gap; i < array.length; i++) {
-				int val = array[i];
-				int j;
-				for (j = i; j >= gap && comp.compare(array[j - gap], val) > 0; j -= gap) {
-					array[j] = array[j - gap];
-				}
-				array[j] = val;
-			}
-		}
-	}
+import java.util.Arrays;
 
+public class Application {
 	public static void main(String[] args){
-		int[] array = {1,5,2,4,10,6,0,3,10};
-		Comparator comp = new Comparator();
+		Command command;
 
-		//Change your code here
-		sort(array, comp);
-		//Change your code here
-
-		for (int i = array.length - 1; i >= 0; i--) {
-			System.out.print(array[i] + " ");
+		if (args == null || args.length == 0)
+		{
+			command = new Echo("Error");
 		}
+
+		else if (Arrays.equals(args, new String[] {"help"}))
+		{
+			command = new Help();
+		}
+
+		else if (Arrays.equals(args, new String[] {"exit"}))
+		{
+			command = new Exit();
+		}
+
+		else if (Arrays.equals(args, new String[] {"date", "now"}))
+		{
+			command = new DateNow();
+		}
+
+		else if (args[0].equals("echo") && args.length == 2)
+		{
+			command = new Echo(args[1]);
+		}
+
+		else
+		{
+			command = new Echo("Error");
+		}
+
+		command.execute();
+	}
+}
+
+package com.tasks5.command;
+
+public class Exit implements Command{
+    @Override
+    public void execute() {
+        System.out.println("Goodbye!");
+    }
+}
+
+package com.tasks5.command;
+public class Help implements Command
+{
+	@Override
+	public void execute()
+	{
+		System.out.println("Help executed");
+	}
+}
+package com.tasks5.command;
+public class DateNow implements Command
+{
+	@Override
+	public void execute()
+	{
+		System.out.println(System.currentTimeMillis());
+	}
+}
+package com.tasks5.command;
+public class Echo implements Command
+{
+	private String command;
+
+	public Echo(String command)
+	{
+		this.command = command;
 	}
 
+	@Override
+	public void execute()
+	{
+		System.out.println(this.command);
+	}
 }
